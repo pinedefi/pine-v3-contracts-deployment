@@ -6,7 +6,7 @@ import "../src/meta/Factory.sol";
 contract DeployFactory is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address W = 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270;
+        address W = vm.envAddress("WETH_ADDRESS");
 
         vm.startBroadcast(deployerPrivateKey);
 
