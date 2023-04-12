@@ -14,6 +14,8 @@ contract ControlPlane01 is OwnableUpgradeable {
   mapping (address => bool) public genuineClone;
   address public _feeStructure;
 
+  event Liquidation(address indexed supportedCollection, uint256 indexed loanID, address indexed poolAddress);
+
   constructor() {
     _disableInitializers();
   }
@@ -88,6 +90,7 @@ contract ControlPlane01 is OwnableUpgradeable {
     (bool unhealthy, ) = PineLendingLibrary.isUnHealthyLoan(lt);
     require(unhealthy, "Loan is not liquidable");
     pool.withdrawERC721(pool._supportedCollection(), loanID, pool.owner(), true);
+    emit Liquidation(pool._supportedCollection(), loanID, address(pool));
   }
 
   function withdrawNFT(address payable target, address nft, uint256 id) external onlyOwner {
@@ -137,6 +140,8 @@ contract ControlPlane01 is OwnableUpgradeable {
 
     // create offer
     ERC721LendingPool02(result2).setDurationParam(duration, ppm);
+
+    ERC721LendingPool02(result2).setBlockLoanLimit(2000000000000000000000000);
     ERC721LendingPool02(result2).transferOwnership(msg.sender);
     genuineClone[result2] = true;
     emit PoolCreated(result2, supportedCollection, supportedCurrency, target, fundSource, duration, ppm);
