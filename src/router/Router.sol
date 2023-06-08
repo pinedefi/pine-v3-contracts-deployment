@@ -46,6 +46,22 @@ contract Router01 is OwnableUpgradeable {
     fee = f;
   }
 
+  function batchBorrowNative(address payable[] memory targets,
+    uint256[] memory valuation,
+    uint256[] memory nftID,
+    uint256[] memory loanDurationSeconds,
+    uint256[] memory expireAtBlock,
+    uint256[] memory borrowedWei,
+    bytes[] memory signature,
+    address pineWallet
+  ) external {
+    batchBorrowETH(targets, valuation, nftID, loanDurationSeconds, expireAtBlock, borrowedWei, signature, pineWallet);
+  }
+
+  function repayNative(address payable target, uint nftID, address pineWallet) payable external {
+    repayETH(target, nftID, pineWallet);
+  }
+
   function batchBorrowETH(
     address payable[] memory targets, 
     uint256[] memory valuation,
