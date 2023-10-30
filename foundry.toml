@@ -4,14 +4,4 @@ out = 'out'
 libs = ['lib']
 solc = "0.8.9"
 
-remappings = [
-    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
-    "ds-test/=lib/forge-std/lib/ds-test/src/",
-    "erc-3525/=lib/erc-3525/contracts/",
-    "erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
-    "forge-std/=lib/forge-std/src/",
-    "openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
-    "openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/"
-]
-
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
