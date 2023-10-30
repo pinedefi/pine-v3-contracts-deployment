@@ -1,6 +1,6 @@
 pragma solidity 0.8.9;
 
-import "openzeppelin-contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import "../libraries/PineLendingLibrary.sol";
 import "./ERC721LendingPool.sol";
 import "../meta/BeaconProxy.sol";

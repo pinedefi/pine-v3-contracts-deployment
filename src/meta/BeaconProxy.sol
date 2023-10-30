@@ -1,2 +1,2 @@
 pragma solidity 0.8.9;
-import "openzeppelin-contracts/proxy/beacon/BeaconProxy.sol";
+import "openzeppelin-contracts/contracts/proxy/beacon/BeaconProxy.sol";

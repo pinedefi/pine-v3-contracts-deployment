@@ -1,7 +1,7 @@
 pragma solidity 0.8.9;
 
-import "openzeppelin-contracts/access/Ownable.sol";
-import "openzeppelin-contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "./TransparentUpgradeableProxy.sol";
 import "./BeaconProxy.sol";
 import "./UpgradeableBeacon.sol";
