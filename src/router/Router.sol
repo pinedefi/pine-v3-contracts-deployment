@@ -73,6 +73,28 @@ contract Router01 is OwnableUpgradeable {
     require(success, "cannot send ether");
   }
 
+  function batchBorrow(
+    address payable[] memory targets, 
+    uint256[] memory valuation,
+    uint256[] memory nftID,
+    uint256[] memory loanDurationSeconds,
+    uint256[] memory expireAtBlock,
+    uint256[] memory borrowedWei,
+    bytes[] memory signature,
+    address pineWallet
+  ) public {
+    for (uint16 i = 0; i < targets.length; i ++) {
+      address currency = NewERC721LendingPool02(targets[i])._supportedCurrency();
+      address collection = NewERC721LendingPool02(targets[i])._supportedCollection();
+      require(IERC721(collection).ownerOf(nftID[i]) == msg.sender, "User not owning NFT");
+      IERC721(collection).setApprovalForAll(targets[i], true);
+      IERC721(collection).transferFrom(msg.sender, address(this), nftID[i]);
+      NewERC721LendingPool02(targets[i]).borrow([valuation[i], nftID[i], loanDurationSeconds[i], expireAtBlock[i], borrowedWei[i]], signature[i], msg.sender, pineWallet);
+      IERC20(currency).transfer(controlPlane, fee);
+      IERC20(currency).transfer(msg.sender, IERC20(currency).balanceOf(address(this)));
+    }
+  }
+
   function repayETH(address payable target, uint nftID, address pineWallet) payable public {
     address currency = NewERC721LendingPool02(target)._supportedCurrency();
     require(currency == WETHaddr, "only works for WETH");
@@ -82,6 +104,14 @@ contract Router01 is OwnableUpgradeable {
     WETH9(payable(currency)).withdraw(IERC20(currency).balanceOf(address(this)));
     (bool success, ) = msg.sender.call{value: address(this).balance}("");
     require(success, "cannot send ether");
+  }
+
+  function repayToken(address payable target, uint nftID, address pineWallet, uint val) payable public {
+    address currency = NewERC721LendingPool02(target)._supportedCurrency();
+    IERC20(currency).transferFrom(msg.sender, address(this), val);
+    IERC20(currency).approve(target, msg.value);
+    _repay(target, nftID, msg.value, pineWallet);
+    IERC20(currency).transfer(msg.sender, IERC20(currency).balanceOf(address(this)));
   }
 
   function _repay(address payable target, uint nftID, uint256 repayAmount, address pineWallet) internal {
