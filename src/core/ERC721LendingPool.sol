@@ -5,9 +5,10 @@ import "openzeppelin-contracts-upgradeable/security/PausableUpgradeable.sol";
 import "openzeppelin-contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "openzeppelin-contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "openzeppelin-contracts/token/ERC721/IERC721Receiver.sol";
-import "openzeppelin-contracts/token/ERC721/IERC721.sol";
+// import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 import "openzeppelin-contracts/token/ERC1155/IERC1155.sol";
+import "erc-3525/IERC3525.sol";
 
 import "../libraries/FeeStructure.sol";
 import "../libraries/PineLendingLibrary.sol";
@@ -64,6 +65,9 @@ contract ERC721LendingPool02 is
     mapping(uint256 => uint256) public blockLoanAmount;
     uint256 public blockLoanLimit;
 
+    uint256[] public supportedSlots;
+    mapping (uint256 => bool) slotSupported;
+
     /**
      * Pool Setup
      */
@@ -97,6 +101,11 @@ contract ERC721LendingPool02 is
     function changeValuationSigner(address _newValuationSigner) external {
         require(msg.sender == owner() || msg.sender == _controlPlane);
         _valuationSigner = _newValuationSigner;
+    }
+
+    function addSupportedSlot(uint256 slot) external onlyOwner {
+        supportedSlots.push(slot);
+        slotSupported[slot] = true;
     }
 
     function setBlockLoanLimit(uint256 bll) public onlyOwner {
@@ -206,6 +215,9 @@ contract ERC721LendingPool02 is
         address borrowFor,
         address pineWallet
     ) external nonReentrant whenNotPaused returns (bool) {
+        if (supportedSlots.length > 0) {
+          require(slotSupported[IERC3525(_supportedCollection).slotOf(x[1])], "Slot not supported");
+        }
         //valuation = x[0]
         //nftID = x[1]
         //uint256 loanDurationSeconds = x[2];
@@ -254,10 +266,18 @@ contract ERC721LendingPool02 is
         updateBlockLoanAmount(x[4]);
         updateMaxLoanAmount(x[4]);
 
+        uint256 feeBps = IControlPlane01(_controlPlane).feeBps();
+
         require(IERC20(_supportedCurrency).transferFrom(
             _fundSource,
             msg.sender,
-            x[4]
+            x[4] - (x[4] * feeBps / 10_000)
+        ));
+
+        require(IERC20(_supportedCurrency).transferFrom(
+            _fundSource,
+            _controlPlane,
+            x[4] * feeBps / 10_000
         ));
         
         _loans[x[1]] = PineLendingLibrary.LoanTerms(
@@ -286,6 +306,8 @@ contract ERC721LendingPool02 is
         );
         return true;
     }
+
+
 
     /**
      * Repay
@@ -364,15 +386,13 @@ contract ERC721LendingPool02 is
         }
 
         require(
-            IERC20(_supportedCurrency).transferFrom(
-                address(this),
+            IERC20(_supportedCurrency).transfer(
                 _fundSource,
                 IERC20(_supportedCurrency).balanceOf(address(this)) - (repaidInterest * _feeStructure.getFeeCutBpsByLenderRatePerBlock(_loans[nftID].interestBPS1000000XBlock) / 10_000)
             ),
             "fund transfer unsuccessful (payload)"
         );
-        require(IERC20(_supportedCurrency).transferFrom(
-                address(this),
+        require(IERC20(_supportedCurrency).transfer(
                 _controlPlane,
                 repaidInterest * _feeStructure.getFeeCutBpsByLenderRatePerBlock(_loans[nftID].interestBPS1000000XBlock) / 10_000
             ),

@@ -1,19 +1,16 @@
-name: test
+name: Validate Smart Contract compilation
 
-on: workflow_dispatch
-
-env:
-  FOUNDRY_PROFILE: ci
+on: 
+  pull_request:
+  push:
+    branches: [main]
 
 jobs:
   check:
-    strategy:
-      fail-fast: true
-
     name: Foundry project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -26,9 +23,7 @@ jobs:
         run: |
           forge --version
           forge build --sizes
-        id: build
 
       - name: Run Forge tests
         run: |
           forge test -vvv
-        id: test
