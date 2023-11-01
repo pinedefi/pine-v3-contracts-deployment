@@ -1,0 +1,38 @@
+{
+	"language": "Solidity",
+	"settings": {
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"outputSelection": {
+			"*": {
+				"": [
+					"ast"
+				],
+				"*": [
+					"abi",
+					"metadata",
+					"devdoc",
+					"userdoc",
+					"storageLayout",
+					"evm.legacyAssembly",
+					"evm.bytecode",
+					"evm.deployedBytecode",
+					"evm.methodIdentifiers",
+					"evm.gasEstimates",
+					"evm.assembly"
+				]
+			}
+		},
+		"remappings": [
+			"ds-test/=lib/forge-std/lib/ds-test/src/",
+			"forge-std/=lib/forge-std/src/",
+			"erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+			"openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
+			"openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/",
+			"@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+			"erc-3525/=lib/erc-3525/contracts/"
+		]
+	}
+}
