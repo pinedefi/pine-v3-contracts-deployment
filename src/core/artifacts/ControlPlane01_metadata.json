@@ -1,0 +1,920 @@
+{
+	"compiler": {
+		"version": "0.8.9+commit.e5eed63a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "version",
+						"type": "uint8"
+					}
+				],
+				"name": "Initialized",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "supportedCollection",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "loanID",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "poolAddress",
+						"type": "address"
+					}
+				],
+				"name": "Liquidation",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "result",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "supportedCollection",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "supportedCurrency",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "fundSource",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint32",
+								"name": "interestBPS1000000XBlock",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "collateralFactorBPS",
+								"type": "uint32"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct ERC721LendingPool02.PoolParams",
+						"name": "ppm",
+						"type": "tuple"
+					}
+				],
+				"name": "PoolCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "_feeStructure",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "m",
+						"type": "uint256"
+					}
+				],
+				"name": "ceil",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "feeStructure",
+						"type": "address"
+					}
+				],
+				"name": "changeFeeStructure",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "salt",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "supportedCollection",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "valuationSigner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "supportedCurrency",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "fundSource",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint32",
+								"name": "interestBPS1000000XBlock",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "collateralFactorBPS",
+								"type": "uint32"
+							}
+						],
+						"internalType": "struct ERC721LendingPool02.PoolParams",
+						"name": "ppm",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ethLimit",
+						"type": "uint256"
+					}
+				],
+				"name": "createClone",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "result",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "feeBps",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "genuineClone",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "feeStructure",
+						"type": "address"
+					}
+				],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "loanID",
+						"type": "uint256"
+					}
+				],
+				"name": "liquidateNFT",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanStartBlock",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "loanExpireTimestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint32",
+								"name": "interestBPS1000000XBlock",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLTVBPS",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint256",
+								"name": "borrowedWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "returnedWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "accuredInterestWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "repaidInterestWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "borrower",
+								"type": "address"
+							}
+						],
+						"internalType": "struct PineLendingLibrary.LoanTerms",
+						"name": "loanTerms",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "txSpeedBlocks",
+						"type": "uint256"
+					}
+				],
+				"name": "outstanding",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "loanStartBlock",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "loanExpireTimestamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint32",
+								"name": "interestBPS1000000XBlock",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint32",
+								"name": "maxLTVBPS",
+								"type": "uint32"
+							},
+							{
+								"internalType": "uint256",
+								"name": "borrowedWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "returnedWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "accuredInterestWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "repaidInterestWei",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "borrower",
+								"type": "address"
+							}
+						],
+						"internalType": "struct PineLendingLibrary.LoanTerms",
+						"name": "loanTerms",
+						"type": "tuple"
+					}
+				],
+				"name": "outstanding",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "f",
+						"type": "uint32"
+					}
+				],
+				"name": "setFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "targets",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					}
+				],
+				"name": "toggleWhitelistedIntermediaries",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					}
+				],
+				"name": "toggleWhitelistedTarget",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "whitelistedFactory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "whitelistedIntermediaries",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "currency",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawERC20",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "nft",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawNFT",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/core/ControlPlane.sol": "ControlPlane01"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [
+			":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+			":ds-test/=lib/forge-std/lib/ds-test/src/",
+			":erc-3525/=lib/erc-3525/contracts/",
+			":erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/",
+			":forge-std/=lib/forge-std/src/",
+			":openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
+			":openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/"
+		]
+	},
+	"sources": {
+		"lib/erc-3525/contracts/IERC3525.sol": {
+			"keccak256": "0x854ade1c21de35966cbe542a620f99184497c7b0a3af55a36927577d9b44484b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://47dd9598199a4d22fbe1d790710929fbbede92ae6f7fc133ed8f4a67a7b091e7",
+				"dweb:/ipfs/QmShtZd4MfrZMT3LjcF2dDJiyouPNVeoktKMe3WGSJaVec"
+			]
+		},
+		"lib/erc-3525/contracts/IERC721.sol": {
+			"keccak256": "0x3b411ca0c2d69ac48c195077080b650a532a05a6f7d194fb4e342c3aeea25bd3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bb1c0fa4d3f7a92b57a13fedbcfa379f93caddeb7faa771efde287a0c5d579bc",
+				"dweb:/ipfs/QmPSxnZKwvrveCfqStQyKSSM7MdHMxJPao3c9kp9mxDANh"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol": {
+			"keccak256": "0xcf4a2c2c1a8b1570ee9a7059c218de1efbc9050239b1111dcfc24081391d11b7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://567bb374cec704c71a8279236b98161c99d68c4e4d490c6ce5d7f5f2acd3d665",
+				"dweb:/ipfs/QmXHXmhmHc9c9ryUSvAoKjNYqn916H1wBFGpRUixWYw9Gp"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol": {
+			"keccak256": "0xa199996a27e88224d1ed796789c731c0b82c476510d0a5e277103b17f71e1d23",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://078ba2ffd403beccbd9f9ff167e99f2f36ad7a1695c4c538befd9644f8d6739a",
+				"dweb:/ipfs/Qmdsr2Y1r5Y5Ltdq15PBmjwQMy6nUckr4hFq3eMQ9iNwxC"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol": {
+			"keccak256": "0x2f2abaad859445142e29b5ec7a04ef04043f982af80dc993af0af4c13da59da2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://77ed93247920c505a55290727b7d518f7c236e4d360028fff5c7e28117d798d3",
+				"dweb:/ipfs/QmbBMPCkARJczz1h4bREinn2pstfoh27U3wVh3ssxdXVxr"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/security/ReentrancyGuardUpgradeable.sol": {
+			"keccak256": "0x076d25bd661ace80511b82765cefd47f399c0398289d90ef04b78022c6c63b89",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c679cab611ad460b9ed78db108ec52c735a3745289cdb2e7df0cfbc87e2b0433",
+				"dweb:/ipfs/QmSeAi6ZZvaXw6ATiJ91esaUDwLp1swAREAuqvzU35LH16"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol": {
+			"keccak256": "0x773f3e446a17a24b1bc7a03bc1a38850e02e0f335595e54f4bc73e70c9b4d71a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8d98a4b048085431c3527ac8f9eb8c915f2aaffb8674eac929e9ae64a68397be",
+				"dweb:/ipfs/QmfMu63vDQLFgQdGsrJdu9Z2Qj3wjWa6NyWdbhg3A7uyac"
+			]
+		},
+		"lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol": {
+			"keccak256": "0x7ca50b2db181b128c3c202f67bbc2fc189628f41a8643027c445facc907a10b6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1baa3e4dd802cf1e2ed3634f79f3b1f86397f1bcb819f55811da1a9bf6a6189c",
+				"dweb:/ipfs/QmPmiK9Tj3P7fhnroK2REuendr4sjx4vjev7PRQJyxMob5"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/interfaces/draft-IERC1822.sol": {
+			"keccak256": "0xe768c5863db91751a70d25c9dac899ec5078c6bacfbc02878652e454aa416b9e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3f27eb11dc6c2673a2de564ab994bbe71c96c184a4ab77529ba0c3a25059a31a",
+				"dweb:/ipfs/QmP5XhZTawPqVHz9L5qfAQbrKvTBYHPudyynAyVoBm2vmd"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol": {
+			"keccak256": "0xb5101a62a9fdbb3587ea51e56d134684ab3ee4633f69b8a0bb99bf24ebbc6b8c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://93ab1a4f76cd2bf6d4bd489d4da93f4818f4d1bb521d6dff45e16b81919a4f13",
+				"dweb:/ipfs/QmWE6jqQZzAnqyF1EKxx2HZBH6Tn36doR7Tc6vWCfKwFW9"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/proxy/Proxy.sol": {
+			"keccak256": "0x62c6b919abeeb4c9146ffbb325fc03b5f2d55a29b8e719b8ff62daab48123565",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://296143200e46ef2d62d089f9e7be424ebd49c37ab44c7ac24da3c2c89a0226d5",
+				"dweb:/ipfs/Qmd3g6y6MU3Udk2z7onjyVdifjTANp7CvFYkJNGGQBDBvB"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/proxy/beacon/BeaconProxy.sol": {
+			"keccak256": "0x8e6523f96ae0050f3de4c1bf1a6d635459e2c5bc83991bdfbeae9d11e3dee152",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7d11d0eb1b874b454ec9034cb5984c81797c07bb8fae3fed6b940c2a6ab015d4",
+				"dweb:/ipfs/QmbwtWDrkuwuXDssbj77M8dCHCYEQCmBFToDnFbvc5SHRy"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/proxy/beacon/IBeacon.sol": {
+			"keccak256": "0xd3effc3ce6d1c85e1aae2ba5c6f28434c2eef52e1fc48b15096a176dcfee5853",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8203f1a5eebff83ed1c75be70af0d00acb5b1b1e54e0b8805097f8fb052e7780",
+				"dweb:/ipfs/QmNzyWV5FxBGX1Djh2LJ89bpZMPfsQ2nck8DL8VaFf6UkJ"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155.sol": {
+			"keccak256": "0x890782eff7f8a74750a6d61338fb8bd301f9bce9716faa673f5755bfd05a4790",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6b508371c3ef78b25b2349badc65836eced11165b50c2b8e483ed760db8b24a1",
+				"dweb:/ipfs/QmcQLSfzc4Th2kL4FfrwqqSHm6TzFXxGQomf5w8FdEZS1K"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0x93c3ecba425886b8933e548ed3adbfc56e40ff66f5c60532458fb06ba81598e5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://62c825197992648dca38edb1db345c0b5fd9e68f7eca893101f45b9cae25acfd",
+				"dweb:/ipfs/QmdzBQtYLpjnVd17qUC3b7YXAGyoRFqKGQKjCJXPumxGss"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
+			"keccak256": "0xf735581e2728965940c9dd60ba73d199e39a2ee9a1ed62e5cab4cbf0ccb5815d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6833b21890a26a47719277e9afab26788ffb48f2e4faeb6099d0b2a7c92d4165",
+				"dweb:/ipfs/QmYEcKDStaqD1t9maNr3VrfBekVGHGU8Zw1RGMDjoHY5aN"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
+			"keccak256": "0x5576eca134a9c67ca351f0b4e7d6b821ae694ff13708ee449420b7c2d746818a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a851368585b7849c729c3d39ce85253f8a12601c6640fd2e9480cbbf9bb1601",
+				"dweb:/ipfs/Qma4Y3TwioVsCk4ZFivEvoYgcG2v2m3CnKomRVPVDYBv2B"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x206e252911fb60d0d6a54fb657b64344c33fa237ddb8553aa668a24d1856a7c2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4cb73e8c2fd4ab43f4ed672a19fd7629fc169034dc461524bebd67d9fe9bb000",
+				"dweb:/ipfs/Qmd9wCoy5gDduquSq7po6uNFx9W28zS5drXXErDnN24aNZ"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol": {
+			"keccak256": "0xc97c28f24caed758d150587f1e57753705c2439f314ac47947739869c4413819",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2319c1a8e34937da319c0a443a3fa9567994a9fc327be7186c7738573bcfa2f",
+				"dweb:/ipfs/QmTSesyJCFLrjSJm5FoVLR1kXM26CnxVy1Ti9HHx31ZyJ2"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/utils/Address.sol": {
+			"keccak256": "0x9d0843efe7418f685e662378051ca0572b56e8ed4e87b97197fb535839d0e2f8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd0692e4d4981ff36bf331a6dda3f60abe2debce9233df65e807639dc7cda713",
+				"dweb:/ipfs/QmeKRcBH8LegzqrtdTtEhZLyYeb7PFkAtChNbLA3fTkbKW"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol": {
+			"keccak256": "0x9e72a3f862ef500b5c5a2a241075bd6c1070ed4de7a62c3deeafef8890480494",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8c95ea4a4cd2c57b91fcb126cf6983a1c5b88371e4786083d3a9582e9055ca81",
+				"dweb:/ipfs/QmWVkPSyZCiJ6vq4bWEMPE2Prx3oeBUy4BzGMgtA3SeVoP"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0x3d3fe7b1901114d50828f5c77ba7f09a2a6a65223620c837364d31b60e5982ac",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6751cee12592cb9c33be618057660d6c84cb0594bd0afa552009438e38d3dd02",
+				"dweb:/ipfs/QmWq8SxNw4q6n1B8i9sFZVaodB6wrcyBPsKPWMsaUyCECH"
+			]
+		},
+		"lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x540685d7ece3faa56f38253270ff11b18e63949fb8659c408123b1874674492e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5474839e19e2571c52eae3aab1dc6e6edf2b20bbba9895f59db6594a2678a3d5",
+				"dweb:/ipfs/QmVHocBeANMkq4TzVM7q9At5NSg1TEpT9D9vgJ5dGcvcPN"
+			]
+		},
+		"src/core/ControlPlane.sol": {
+			"keccak256": "0x42b57209ff156733764f27e0558bc924054c9b91f84fe2ad635b70529af891e4",
+			"urls": [
+				"bzz-raw://cca64ea9ab544ad2f3004333772593d963359bb9b31729358b8a42842fc91121",
+				"dweb:/ipfs/QmYhE7wAiJx81JWU5SUti8nAZqHhR7xLvJTdxkuNdL1bXX"
+			]
+		},
+		"src/core/ERC721LendingPool.sol": {
+			"keccak256": "0x3bbfac7460c132db52773f015df03d82e6b52e66742ebfb1b23879b73215ffd2",
+			"urls": [
+				"bzz-raw://ce2fbce118d0fbab9e12d64da560b5589208fca4c2917cdddc53da703ccef299",
+				"dweb:/ipfs/QmaKfELVTeRT3Y7dW2sgGjzWruMsgTWecPJudUw686Jrjy"
+			]
+		},
+		"src/interfaces/IControlPlane01.sol": {
+			"keccak256": "0xb922b8e35800ef6290613a88f5516b5d546cdd2d74a477d8baa7603199ef7b3f",
+			"urls": [
+				"bzz-raw://461a3610f82855f0e79b599599a8ec66e7401b3ee937b739e194ffc55cede63b",
+				"dweb:/ipfs/QmXLwFrvsHf1op7JYaAKekEt87wYCQGQZUxHkrCNjAMuxa"
+			]
+		},
+		"src/interfaces/IFlashloanReceiver.sol": {
+			"keccak256": "0xeffc742e3cfd8337338601c18359c589ea9bc5558ca8cd8934c14ca4e060f54d",
+			"urls": [
+				"bzz-raw://bd9c482368a1cb9627f2f76d665203ba7d3f2f59622e2642be7e1b90a4086459",
+				"dweb:/ipfs/QmPZFF6EWypYhX5SnSxbmZQ766hWbBtzaqHBWXh5hEbmKd"
+			]
+		},
+		"src/libraries/FeeStructure.sol": {
+			"keccak256": "0xac628b484d8244f1524f734e591b13f2904dce4db79142185b467499a1f540bf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2dafead1a57eb56ee30c64d70146be66a53dd4f831938a594c3f8cb7896f898e",
+				"dweb:/ipfs/QmWdssZjAaJqUmwMiUc5m3zC7DFXPpQFq75D7tykQPH4qZ"
+			]
+		},
+		"src/libraries/PineLendingLibrary.sol": {
+			"keccak256": "0x4bf9c34d0670a432f9547f76160fff944793006894436f5daf5f0c50ae47e339",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e6437050c4201496d7ce46e51b2a4671f07c7f1504c0d3bdbeaa3316f0597aa",
+				"dweb:/ipfs/QmYXFpcQ9tZyJcfGfKBm3zD9BQ4gzJusczo8iHBVxXUd4X"
+			]
+		},
+		"src/libraries/VerifySignaturePool02.sol": {
+			"keccak256": "0xbe79965b38b2b1819d0179ce80122d8f8a1aedb26cb538dee6d172220b55ced6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9913ac7a8e0b712be2c16ac873cc16ea5f0d3a483ffb525d89578e82346bfe3a",
+				"dweb:/ipfs/Qmd9zzeC6zNTLedD8zxb8S7fxH5DtLiqBNQWncEFLq2qeR"
+			]
+		},
+		"src/meta/BeaconProxy.sol": {
+			"keccak256": "0xc6dc37911181006b321a17346531051c0501a62ae63c09d36fe81e8a6cc215e0",
+			"urls": [
+				"bzz-raw://c3850ac3c516f1025f2a7e6516d35b28c58bcb718d7999cc4a6646ffa91cec8b",
+				"dweb:/ipfs/QmPcaisYsD53AH3m8KmRQkUU1xqW3NDnLHeRtwVXgGjmGz"
+			]
+		}
+	},
+	"version": 1
+}
