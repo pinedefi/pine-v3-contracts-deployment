@@ -1,10 +1,8 @@
 pragma solidity 0.8.9;
 import "openzeppelin-contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "openzeppelin-contracts/token/ERC20/IERC20.sol";
-// import "openzeppelin-contracts/token/ERC721/IERC721.sol";
-import "erc-3525/IERC721.sol";
+import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "../interfaces/WETH.sol";
-
 
 interface NewERC721LendingPool02 {
 
@@ -106,14 +104,6 @@ contract Router01 is OwnableUpgradeable {
     IERC20(payable(currency)).approve(target, 0);
     (bool success, ) = msg.sender.call{value: address(this).balance}("");
     require(success, "cannot send ether");
-  }
-
-  function repayToken(address payable target, uint nftID, address pineWallet, uint val) payable public {
-    address currency = NewERC721LendingPool02(target)._supportedCurrency();
-    IERC20(currency).transferFrom(msg.sender, address(this), val);
-    IERC20(currency).approve(target, msg.value);
-    _repay(target, nftID, msg.value, pineWallet);
-    IERC20(currency).transfer(msg.sender, IERC20(currency).balanceOf(address(this)));
   }
 
   function _repay(address payable target, uint nftID, uint256 repayAmount, address pineWallet) internal {
