@@ -107,6 +107,14 @@ contract Router01 is OwnableUpgradeable {
     require(success, "cannot send ether");
   }
 
+  function repayToken(address payable target, uint nftID, address pineWallet, uint val) payable public {
+    address currency = NewERC721LendingPool02(target)._supportedCurrency();
+    IERC20(currency).transferFrom(msg.sender, address(this), val);
+    IERC20(currency).approve(target, msg.value);
+    _repay(target, nftID, msg.value, pineWallet);
+    IERC20(currency).transfer(msg.sender, IERC20(currency).balanceOf(address(this)));
+  }
+
   function _repay(address payable target, uint nftID, uint256 repayAmount, address pineWallet) internal {
     NewERC721LendingPool02(target).repay(nftID, repayAmount, pineWallet);
   }
