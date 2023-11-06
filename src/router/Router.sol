@@ -5,7 +5,6 @@ import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 import "erc-3525/IERC721.sol";
 import "../interfaces/WETH.sol";
 
-
 interface NewERC721LendingPool02 {
 
   function _supportedCurrency() external view returns (address);
